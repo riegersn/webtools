@@ -20,34 +20,33 @@ if [ -n "$1" ] && [ "$1" == "--link" ]; then
   mode="ln -sf"
 fi
 
-# Mode
-# Will copy by default, pass --link to ln the files instead
+# Loop through the file list
 for i in "${filelist[@]}"
 do
   :
   last=`echo "${i: -1}"`
   if [ "$last" == "*" ]; then
-  	$mode $project/$components/$i $project/$font_dir
-  	printf "$i -> $font_dir\n"
+    $mode $project/$components/$i $project/$font_dir
+    printf "$i -> $font_dir\n"
 
   elif [ -f "$project/$components/$i"  ]; then
-  	file="$(basename $i)"
-  	ext="${file##*.}"
-  	case "$ext" in
-  		'js' )
-  			fldr=$js_dir
-  			$mode $project/$components/$i $project/$fldr
-  			printf "$i -> $fldr\n"
-  			;;
-  		'css' )
-  			fldr=$css_dir
-  			$mode $project/$components/$i $project/$fldr
-  			printf "$i -> $fldr\n"
-  			;;
-  		* )
-  			printf "$i (unknown)\n"
-  			;;
-  	esac
+    file="$(basename $i)"
+    ext="${file##*.}"
+    case "$ext" in
+      'js' )
+        fldr=$js_dir
+        $mode $project/$components/$i $project/$fldr
+        printf "$i -> $fldr\n"
+        ;;
+      'css' )
+        fldr=$css_dir
+        $mode $project/$components/$i $project/$fldr
+        printf "$i -> $fldr\n"
+        ;;
+      * )
+        printf "$i (unknown)\n"
+        ;;
+    esac
 
   else
     printf "$i (error)\n"
