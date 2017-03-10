@@ -1,6 +1,7 @@
 #!/bin/bash
 #
 # webtools.sh
+# bower is bloat for me
 #
 # Copyright (C) 2017 Shawn Rieger - All Rights Reserved
 # Permission to copy and modify is granted under the MIT license
@@ -16,39 +17,39 @@ mkdir -p $project/$js_dir $project/$css_dir $project/$font_dir
 # Will copy by default, pass --link to ln the files instead
 mode="cp -a"
 if [ -n "$1" ] && [ "$1" == "--link" ]; then
-	mode="ln -sf"
+  mode="ln -sf"
 fi
 
 # Mode
 # Will copy by default, pass --link to ln the files instead
 for i in "${filelist[@]}"
 do
-	:
-	last=`echo "${i: -1}"`
-	if [ "$last" == "*" ]; then
-		$mode $project/$components/$i $project/$font_dir
-		printf "$i -> $font_dir\n"
+  :
+  last=`echo "${i: -1}"`
+  if [ "$last" == "*" ]; then
+  	$mode $project/$components/$i $project/$font_dir
+  	printf "$i -> $font_dir\n"
 
-	elif [ -f "$project/$components/$i"  ]; then
-		file="$(basename $i)"
-		ext="${file##*.}"
-		case "$ext" in
-			'js' )
-				fldr=$js_dir
-				$mode $project/$components/$i $project/$fldr
-				printf "$i -> $fldr\n"
-				;;
-			'css' )
-				fldr=$css_dir
-				$mode $project/$components/$i $project/$fldr
-				printf "$i -> $fldr\n"
-				;;
-			* )
-				printf "$i (unknown)\n"
-				;;
-		esac
+  elif [ -f "$project/$components/$i"  ]; then
+  	file="$(basename $i)"
+  	ext="${file##*.}"
+  	case "$ext" in
+  		'js' )
+  			fldr=$js_dir
+  			$mode $project/$components/$i $project/$fldr
+  			printf "$i -> $fldr\n"
+  			;;
+  		'css' )
+  			fldr=$css_dir
+  			$mode $project/$components/$i $project/$fldr
+  			printf "$i -> $fldr\n"
+  			;;
+  		* )
+  			printf "$i (unknown)\n"
+  			;;
+  	esac
 
-	else
-		printf "$i (error)\n"
-	fi
+  else
+    printf "$i (error)\n"
+  fi
 done

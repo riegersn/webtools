@@ -17,11 +17,11 @@ css_dir=$base/css
 font_dir=$base/fonts
 
 # your project files.
-# (assumes pwd is $project/$components dir)
+# (assumes $pwd is $project/$components dir)
 filelist=(
-	'jquery/dist/jquery.min.js'
-	'bootstrap/dist/css/bootstrap.min.css'
-	'bootstrap/dist/js/bootstrap.min.js'
-	'bootstrap/dist/fonts/*'
-	'masonry-layout/dist/masonry.pkgd.min.js'
+  'jquery/dist/jquery.min.js'
+  'bootstrap/dist/css/bootstrap.min.css'
+  'bootstrap/dist/js/bootstrap.min.js'
+  'bootstrap/dist/fonts/*'
+  'masonry-layout/dist/masonry.pkgd.min.js'
 )
